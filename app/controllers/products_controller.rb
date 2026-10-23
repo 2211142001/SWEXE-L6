@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
       flash[:message] = "商品を登録しました"
       redirect_to products_index_path
     else
+      @product = product
       flash[:message] = "商品を登録できませんでした"
       render :new, status: :unprocessable_entity
     end
