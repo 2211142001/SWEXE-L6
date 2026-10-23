@@ -1,0 +1,25 @@
+<% if (@cart_item && @cart_item.errors.present?) || flash[:message].present? %>
+  <h3>入力内容にエラーがあります</h3>
+  <ul>
+    <% if @cart_item && @cart_item.errors.present? %>
+        <% @cart_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    <% else %>
+        <li><%= flash[:message] %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2>商品追加</h2>
+
+<p>商品名: <%= @cart_item.product.name %></p>
+<p>価格: <%= @cart_item.product.price %>円</p>
+
+<%= form_with model: @cart_item, url: cart_items_create_path do |f| %>
+  <p>
+    <%= f.label :quantity, '数量' %>
+    <%= f.text_field :quantity %>
+  </p>
+  <%= f.submit '追加' %>
+<% end %>

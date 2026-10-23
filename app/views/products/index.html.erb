@@ -8,6 +8,15 @@
         flex-direction: column;
         gap: 8px;
     }
+
+    .actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .spacer {
+        flex-grow: 1;
+    }
 }
 </style>
 
@@ -22,7 +31,11 @@
         <div class="product">
             <div>商品名: <%= product.name %></div>
             <div>価格: <%= product.price %></div>
-            <%= link_to '削除', products_destroy_path(product.id), data: { turbo_method: :delete }  %>
+            <div class="actions">
+                <%= link_to 'カートに追加', cart_items_new_path(product.id) %>
+                <div class="spacer"></div>
+                <%= link_to '削除', products_destroy_path(product.id), data: { turbo_method: :delete }  %>
+            </div>
         </div>
     <% end %>
 </div>
