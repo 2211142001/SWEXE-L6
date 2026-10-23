@@ -9,6 +9,7 @@ class CartItemsController < ApplicationController
   def create
     @cart_item = CartItem.new(quantity: params[:cart_item][:quantity])
     @cart_item.product = Product.find(params[:id])
+    @cart_item.cart = current_cart
 
     if @cart_item.save
       flash[:message] = "商品をカートに追加しました"
@@ -26,7 +27,7 @@ class CartItemsController < ApplicationController
     else
       flash[:message] = "商品をカートから削除できませんでした"
     end
-    redirect_to carts_index_path
+    redirect_to carts_show_path
   end
 
   private

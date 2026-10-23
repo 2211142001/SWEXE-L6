@@ -25,7 +25,11 @@
 <% end %>
 
 <div class="main">
-    <%= link_to '商品登録', products_new_path %>
+    <div class="actions">
+        <%= link_to 'カートを見る', carts_show_path %>
+        <div class="spacer"></div>
+        <%= link_to '商品登録', products_new_path %>
+    </div>
 
     <% @products.each do |product| %>
         <div class="product">

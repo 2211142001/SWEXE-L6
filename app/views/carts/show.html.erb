@@ -1,2 +1,40 @@
-<h1>Carts#show</h1>
-<p>Find me in app/views/carts/show.html.erb</p>
+<style>
+.main {
+    .product {
+        border: 1px solid #ccc;
+        padding: 16px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .spacer {
+        flex-grow: 1;
+    }
+}
+</style>
+
+<% if flash[:message] %>
+    <p><%= flash[:message] %></p>
+<% end %>
+
+<div class="main">
+    <%= link_to 'トップに戻る', products_index_path %>
+
+    <% @cart.each do |item| %>
+        <div class="product">
+            <div>商品名: <%= item.product.name %></div>
+            <div>価格: <%= item.product.price %>円</div>
+            <div>個数: <%= item.quantity %></div>
+            <div class="actions">
+                <%= link_to 'カートから削除', cart_items_destroy_url(item.id), data: { turbo_method: :delete }  %>
+            </div>
+        </div>
+    <% end %>
+</div>
