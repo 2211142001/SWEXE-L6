@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "carts/show"
   root "products#index"
   get "products/index"
   get "products/new"
