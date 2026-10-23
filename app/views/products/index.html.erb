@@ -1,0 +1,28 @@
+<style>
+.main {
+    .product {
+        border: 1px solid #ccc;
+        padding: 16px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+</style>
+
+<% if flash[:message] %>
+    <p><%= flash[:message] %></p>
+<% end %>
+
+<div class="main">
+    <%= link_to '商品登録', products_new_path %>
+
+    <% @products.each do |product| %>
+        <div class="product">
+            <div>商品名: <%= product.name %></div>
+            <div>価格: <%= product.price %></div>
+            <%= link_to '削除', products_destroy_path(product.id), data: { turbo_method: :delete }  %>
+        </div>
+    <% end %>
+</div>

@@ -1,0 +1,24 @@
+<% if (@product && @product.errors.present?) || flash[:message].present? %>
+  <h3>入力内容にエラーがあります</h3>
+  <ul>
+    <% if @product && @product.errors.present? %>
+        <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    <% else %>
+        <li><%= flash[:message] %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @product, url: products_create_path do |f| %>
+  <p>
+    <%= f.label :name, '商品名' %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :price, '価格' %>
+    <%= f.text_field :price %>
+  </p>
+  <%= f.submit '登録' %>
+<% end %>
